@@ -1,0 +1,76 @@
+body{
+    width: 100%;
+  height: 200px;
+  background: rgb(235, 193, 195);
+  box-shadow: 0 -700px 100px -40px rgb(235, 226, 228) inset;
+  animation: background 10s infinite alternate;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  
+}
+
+@keyframes background {
+    50% {
+      background: rgb(235, 226, 228);
+      box-shadow: 0 -400px 50px -100px rgb(192, 207, 228) inset;
+    }
+}
+
+
+.container{
+    font-family: "Tahoma";
+    border: black solid 0.5px;
+    width: 349px;
+    height: 572px;
+    background-color: rgb(194, 233, 233);
+    border-radius: 10px;
+}
+  
+
+.item-container{
+    margin-left: 0.5px;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    background-color: rgb(242, 247, 247); ;
+    border-radius: 10px;
+
+
+}
+.item{
+    font-size: 24px;
+    border-radius: 10px;
+    margin: 2px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 83px;
+    height: 80px;
+    background-color: rgb(183, 208, 231);
+    
+}
+.item:hover{
+    background-color: burlywood;
+}
+
+input{
+    margin-bottom: 2px;
+    border-radius: 10px;
+    border: none;
+    text-align: right;
+    font-size: 40px;
+    outline: none;
+    width: 100%;
+    height: 148px;
+}
+
+ 
