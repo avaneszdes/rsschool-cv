@@ -24,6 +24,7 @@ body{
 
 
 .container{
+   
     font-family: "Tahoma";
     border: black solid 0.5px;
     width: 349px;
@@ -34,19 +35,29 @@ body{
   
 
 .item-container{
-    margin-left: 0.5px;
+    padding-left:1px;
+    padding-right: -1px;
     flex-wrap: wrap;
     display: flex;
     align-items: center;
     width: 100%;
     height: auto;
-    background-color: rgb(242, 247, 247); ;
+    background-color: transparent;
     border-radius: 10px;
+}
 
-
+.bg-pow{
+    width: 5px;
+    height: 5px;
+    background: url(./pow.png) center no-repeat;
+}
+.bg-sqrt{
+    width: 5px;
+    height: 5px;
+    background: url(./sqrt.png) center no-repeat  ;
 }
 .item{
-    font-size: 24px;
+    font-size: 28px;
     border-radius: 10px;
     margin: 2px;
     cursor: pointer;
