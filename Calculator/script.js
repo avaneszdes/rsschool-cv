@@ -13,21 +13,20 @@ calc.addEventListener('input', (e) => {
     }
 });
 
-// || (/[()]/.test(preLast) && /[()]/.test(preLast))
-
 const insert = (num) => {
 
     if (calc.value.length > 1) {
         let preLast = calc.value[calc.value.length - 1];
 
-
         if ((regex.test(num) && regex.test(preLast))) {
             calc.value = calc.value.slice(0, -1);
 
-            if (/[*/]/.test(preLast) && /[-+]/.test(num)) {
-                calc.value = calc.value + (preLast + '(');
+            if (/[*/+-]/.test(preLast) && /[-]/.test(num) && preLast !== '-') {
+                calc.value = calc.value + preLast ;
             }
-
+            else{
+                calc.value = calc.value.slice(0, -1);
+            }
             calc.value = calc.value + num;
             return;
         }
@@ -44,10 +43,20 @@ const deleteLastElement = () => {
 }
 
 calculate.addEventListener('click', (e) => {
-    calc.value = calculatee(parseCalculationString(calc.value));
+
+    let newArray = calc.value.split('').map((item) => {
+        let temp = '';
+        if (item !== '(') {
+            temp = temp+ item;
+        }
+        return temp;
+    }).join('');
+    calc.value = calculatee(parseCalculationString(newArray));
 });
 
 function parseCalculationString(s) {
+
+
     var calculation = [],
         current = '';
     for (var i = 0, ch; ch = s.charAt(i); i++) {
@@ -70,7 +79,7 @@ function parseCalculationString(s) {
 
 function calculatee(cal) {
 
-    var ops = [ { '√': (a, b) => Math.sqrt(b) },{ '^': (a, b) => Math.pow(a, b) },
+    var ops = [{ '√': (a, b) => Math.sqrt(b) }, { '^': (a, b) => Math.pow(a, b) },
     { '*': (a, b) => a * b, '/': (a, b) => a / b },
     { '+': (a, b) => a + b, '-': (a, b) => a - b }],
         newCalc = [],
