@@ -43,15 +43,7 @@ const deleteLastElement = () => {
 }
 
 calculate.addEventListener('click', (e) => {
-
-    let newArray = calc.value.split('').map((item) => {
-        let temp = '';
-        if (item !== '(') {
-            temp = temp+ item;
-        }
-        return temp;
-    }).join('');
-    calc.value = calculatee(parseCalculationString(newArray));
+    calc.value = +calculatee(parseCalculationString(calc.value)).toFixed(2);
 });
 
 function parseCalculationString(s) {
