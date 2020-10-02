@@ -1,9 +1,18 @@
 let calc = document.querySelector('.calc-input');
 let calculate = document.querySelector('.calculate');
-let isPasteFlag = false;
-let savedValueBeforePaste = '';
-let regex = /[-+*/.]/;
-calc.addEventListener('input', (e) => {
+
+calc.addEventListener('input', (e) =>  {
+    insertIntoInput(num)})
+
+calculate.addEventListener('click', (e) => calc.value = +calculatee(parseCalculationString(calc.value)).toFixed(2))
+
+const insert = (num) =>  insertIntoInput(num);
+
+const clearAll = () => calc.value = "";
+
+const deleteLastElement = () =>  calc.value = calc.value.slice(0, calc.value.length - 1);
+
+const insertIntoInput =(num) => {
     calc.value = calc.value + num;
 
     if (/[+*/^]/.test(calc.value[0])) {
@@ -13,43 +22,18 @@ calc.addEventListener('input', (e) => {
         || calc.value[calc.value.length - 1] === '-' && calc.value[calc.value.length - 2] === '-') {
             calc.value = calc.value.slice(0, -1);
     }
-    else if (calc.value[calc.value.length - 1] === '√' && !/[*-/+-]/.test(calc.value[calc.value.length - 2]) && calc.value[0] !== '√' || calc.value[1] === '√' ) {
+    else if (calc.value[calc.value.length - 1] === '√' && !/[*-/+]/.test(calc.value[calc.value.length - 2]) && calc.value[0] !== '√' || calc.value[1] === '√' ) {
         calc.value = calc.value.slice(0, -1);
     }
-});
-
-const insert = (num) => {
-
-    calc.value = calc.value + num;
-
-    if (/[+*/^]/.test(calc.value[0])) {
+    
+    if(/[*/+-]/.test(calc.value[calc.value.length - 1]) &&  /[*/+-]/.test(num)){
         calc.value = calc.value.slice(0, -1);
-    }
-    else if (calc.value.length > 1 & /[+*/.]/.test(calc.value[calc.value.length - 1]) && /[-+*/.]/.test(calc.value[calc.value.length - 2])
-        || calc.value[calc.value.length - 1] === '-' && calc.value[calc.value.length - 2] === '-') {
-            calc.value = calc.value.slice(0, -1);
-    }
-    else if (calc.value[calc.value.length - 1] === '√' && !/[*-/+-]/.test(calc.value[calc.value.length - 2]) && calc.value[0] !== '√' || calc.value[1] === '√' ) {
-        calc.value = calc.value.slice(0, -1);
+        calc.value = calc.value + num;
     }
 
 }
 
-const clearAll = () => {
-    calc.value = "";
-}
-
-const deleteLastElement = () => {
-    calc.value = calc.value.slice(0, calc.value.length - 1);
-}
-
-calculate.addEventListener('click', (e) => {
-    calc.value = +calculatee(parseCalculationString(calc.value)).toFixed(2);
-});
-
-function parseCalculationString(s) {
-
-
+const parseCalculationString= (s) => {
     var calculation = [],
         current = '';
     for (var i = 0, ch; ch = s.charAt(i); i++) {
@@ -70,8 +54,7 @@ function parseCalculationString(s) {
     return calculation;
 }
 
-function calculatee(cal) {
-
+const calculatee = (cal) => {
     var ops = [{ '√': (a, b) => Math.sqrt(b) }, { '^': (a, b) => Math.pow(a, b) },
     { '*': (a, b) => a * b, '/': (a, b) => a / b },
     { '+': (a, b) => a + b, '-': (a, b) => a - b }],
@@ -88,7 +71,6 @@ function calculatee(cal) {
             } else {
                 newCalc.push(cal[j]);
             }
-
         }
         cal = newCalc;
         newCalc = [];
