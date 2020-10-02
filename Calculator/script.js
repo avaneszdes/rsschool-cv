@@ -4,34 +4,35 @@ let isPasteFlag = false;
 let savedValueBeforePaste = '';
 let regex = /[-+*/.]/;
 calc.addEventListener('input', (e) => {
-    let lastValue = calc.value[calc.value.length - 1];
-    let preLast = calc.value[calc.value.length - 2];
-    if (lastValue.search(/[-+*/.]/) !== -1 && preLast.search(/[-+*/.]/) !== -1
-        || lastValue.search(/[()]/) !== -1 && preLast.search(/[()]/) !== -1
-        || lastValue.search(/[^\d-+*/.()]/g) !== -1) {
+    calc.value = calc.value + num;
+
+    if (/[+*/^]/.test(calc.value[0])) {
+        calc.value = calc.value.slice(0, -1);
+    }
+    else if (calc.value.length > 1 & /[+*/.]/.test(calc.value[calc.value.length - 1]) && /[-+*/.]/.test(calc.value[calc.value.length - 2])
+        || calc.value[calc.value.length - 1] === '-' && calc.value[calc.value.length - 2] === '-') {
+            calc.value = calc.value.slice(0, -1);
+    }
+    else if (calc.value[calc.value.length - 1] === '√' && !/[*-/+-]/.test(calc.value[calc.value.length - 2]) && calc.value[0] !== '√' || calc.value[1] === '√' ) {
         calc.value = calc.value.slice(0, -1);
     }
 });
 
 const insert = (num) => {
 
-    if (calc.value.length > 1) {
-        let preLast = calc.value[calc.value.length - 1];
-
-        if ((regex.test(num) && regex.test(preLast))) {
-            calc.value = calc.value.slice(0, -1);
-
-            if (/[*/+-]/.test(preLast) && /[-]/.test(num) && preLast !== '-') {
-                calc.value = calc.value + preLast ;
-            }
-            else{
-                calc.value = calc.value.slice(0, -1);
-            }
-            calc.value = calc.value + num;
-            return;
-        }
-    }
     calc.value = calc.value + num;
+
+    if (/[+*/^]/.test(calc.value[0])) {
+        calc.value = calc.value.slice(0, -1);
+    }
+    else if (calc.value.length > 1 & /[+*/.]/.test(calc.value[calc.value.length - 1]) && /[-+*/.]/.test(calc.value[calc.value.length - 2])
+        || calc.value[calc.value.length - 1] === '-' && calc.value[calc.value.length - 2] === '-') {
+            calc.value = calc.value.slice(0, -1);
+    }
+    else if (calc.value[calc.value.length - 1] === '√' && !/[*-/+-]/.test(calc.value[calc.value.length - 2]) && calc.value[0] !== '√' || calc.value[1] === '√' ) {
+        calc.value = calc.value.slice(0, -1);
+    }
+
 }
 
 const clearAll = () => {
