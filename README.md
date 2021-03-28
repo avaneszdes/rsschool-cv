@@ -1,1 +1,1 @@
-https://github.com/avaneszdes/rsschool-cv.git 
+this site is published at https://avaneszdes.github.io/rsschool-cv/
